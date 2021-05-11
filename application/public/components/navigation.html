@@ -1,0 +1,116 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark" fluid>
+    <a class="navbar-brand" href="/">
+        <img src="../images/logo_dark.png" width="70" height="30" alt="Logo">
+    </a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation bar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbar-content">
+        <ul class="navbar-nav mr-auto">
+            <!-- New Post Button -->
+            <li class="nav-item">
+                <button id="new-post-button" class="btn-sm btn-success my-2 my-sm-0">
+                    <i class="fas fa-upload"></i>
+                    New Post
+                </button>
+            </li>
+        </ul>
+
+        <!-- Search bar -->
+        <form class="form-inline my-2 my-lg-0" action="">
+            <div class="input-group">
+                <input id="search-input" class="form-control" type="search" placeholder="Search for images" aria-label="Search" required>
+                <div class="input-group-append">
+                    <button id="query-button" class="btn-sm btn-success" type="search">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+
+    
+        <!-- Auth Links, only visible when no session is found -->
+        <ul class="navbar-nav ml-auto" id="auth-links" hidden>
+            <li class="nav-item">
+                <button id="auth-button" class="btn-sm btn-primary my-2 mr-2" type="button">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Login
+                </button>
+            </li>
+            <li class="nav-item">
+                <button id="register-button" class="btn-sm btn-primary my-2" type="button">
+                    <i class="far fa-user-circle"></i>
+                    Register
+                </button>
+            </li>
+        </ul>
+    
+        <!-- User Links, only visible when session is found. -->
+        <ul class="navbar-nav ml-auto" id="user-links" hidden>
+            <li class="nav-item">
+                <button id="profile-button" class="btn-sm btn-primary my-2 mr-2" type="button">
+                    <i class="fas fa-user"></i>
+                    Profile
+                </button>
+            </li>
+            <li class="nav-item">
+                <button id="logout-button" class="btn-sm btn-danger my-2" type="button">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </button>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Implementing sessions -->
+<script src="../javascripts/sessions.js"></script>
+
+<!-- Configuring Buttons -->
+<script>
+    let _newPostButton = document.getElementById('new-post-button');
+    let _authButton = document.getElementById('auth-button');
+    let _profileButton = document.getElementById('profile-button');
+    let _registerButton = document.getElementById('register-button');
+    let _logoutButton = document.getElementById('logout-button');
+
+    _newPostButton.onclick = (event) => {
+        event.preventDefault();
+        location.replace('/postImage');
+    }
+
+    _authButton.onclick = (event) => {
+        event.preventDefault();
+        location.replace('/login');
+    }
+
+    _profileButton.onclick = (event) => {
+        event.preventDefault();
+        location.replace('/profile');
+    }
+
+    _registerButton.onclick = (event) => {
+        event.preventDefault();
+        location.replace('/register');
+    }
+
+    _logoutButton.onclick = (event) => {
+        event.preventDefault();
+        logOutClick();
+    }
+</script>
+
+<!-- Handling Search -->
+<script>
+    let _searchInput = document.getElementById('search-input');
+    let _searchButton = document.getElementById('query-button');
+
+    _searchButton.onclick = (event) => {
+        event.preventDefault();
+        if(/[^\s]+/.test(_searchInput.value)) {
+            location.replace(`/search?query=${_searchInput.value}`);
+        }
+    }
+</script>

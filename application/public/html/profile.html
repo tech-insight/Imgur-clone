@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="head-profile-username">Imgur</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/121067a9e4.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/style.css">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <div id="navigation-bar"></div>
+
+    <div id="profile-container" class="container mt-4" hidden>
+        <!-- User Information -->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card bg-primary text-white">
+                    <div class="card-body">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h4 id="profile-username" class="card-title"></h4>
+                            <p>
+                                Registered
+                                <strong><span id="profile-register-date" class="text-white"></span></strong>
+                            </p>
+                        </div>
+                        <ul class="list-inline float-right">
+                            <li class="list-inline-item">
+                                <i class="fas fa-upload"></i>
+                                <strong><span id="post-uploads"></span></strong> uploads
+                            </li>
+                            <li class="list-inline-item">
+                                <i class="fas fa-eye"></i>
+                                <strong><span id="post-views"></span></strong> views
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- User Posts -->
+        <div class="row">
+            <div class="col-sm-12">
+                <div id="image-card-container" class="container card-columns image-card-container" hidden>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+<!-- Bootstrap Scripts -->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<!-- Axios -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<!-- Moment.js -->
+<script src="https://momentjs.com/downloads/moment.js"></script>
+<!-- Image Card Function -->
+<script src="../javascripts/images.js"></script>
+<!-- Profile Functions -->
+<script src="../javascripts/profile.js"></script>
+
+<!-- Loading Navigation 'Component' -->
+<script>
+    $.get('./components/navigation.html', (data) => {
+        $('#navigation-bar').replaceWith(data);
+    })
+</script>
+
+<!-- Querying database for user data and posts -->
+<script>
+    let params = new URLSearchParams(window.location.search);
+
+    if(params.has('u')) {
+        let username = params.get('u');
+        getUserInformation(username);
+        getUserPosts(username);
+    }
+
+</script>
+
+</html>
